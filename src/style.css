@@ -1,0 +1,88 @@
+#app {
+    background-image: url("./assets/tree-pattern.png"); /* Downloaded from https://www.transparenttextures.com/ */
+    background-repeat: repeat;
+    background-color: #3a2f0a;
+}
+
+
+/* Global Button styles */
+.btn {
+    background: #2E8B57;
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 1rem;
+    font-weight: bold;
+    font-family: 'Tahoma', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #259758;
+    color: #FFF;
+    box-shadow: 0px 0px 10px rgba(185, 185, 0, 0.5);
+    transform: scale(1.025);
+}
+
+/* Global card styles */
+
+.card {
+    background: #ecd4aa;
+    border-radius: 1rem;
+    font-family: 'Georgia', serif;
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #5A3E1B;
+}
+
+.card-text {
+    font-family: 'Arial', sans-serif;
+    color: #3D3D3D
+}
+
+.card-image-container {
+    overflow: hidden;
+    position: relative;
+    background-color: #c5ac81;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* Global list styles */
+
+.list-group-item {
+    background: #ecd4aa;
+    border: 1px solid #5A3E1B;
+    color: #5A3E1B;
+}
+
+/* Global form styles */
+
+.form-control {
+    background: #f6e7cc;
+}
+
+textarea {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Global nav button styles */
+
+#navigation-buttons .btn {
+    width: 25%;
+}
+
+@media (min-width: 992px) {
+    #navigation-buttons .btn {
+        width: 15%;
+    }
+}

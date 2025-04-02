@@ -1,0 +1,13 @@
+#monkey-list .list-group-item:hover {
+    background-color: #f7dfb5;
+    transform: scale(1.01);
+    transition: 0.3s;
+}
+
+#monkey-list .id-badge {
+    width: 4rem;
+    font-size: 1.5rem;
+    background-color: #5A3E1B;
+    border-radius: 1rem;
+    color: #ecd4aa;
+}

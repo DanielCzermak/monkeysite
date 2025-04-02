@@ -1,0 +1,14 @@
+.modal-content {
+    background: #ecd4aa;
+    border-radius: 1rem;
+    font-family: 'Georgia', serif;
+}
+
+.modal .btn-danger {
+    background-color: #9f0c0c;
+}
+
+.modal .btn-danger:hover {
+    background-color: #850c0c;
+    color: #000000;
+}

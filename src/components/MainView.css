@@ -1,0 +1,17 @@
+.titletext {
+    font-family: 'Verdana', sans-serif; 
+    color: #DAA520; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+@media (max-width: 576px) {
+    .titletext {
+        display: none;
+    }
+}
+
+.btn-notselected {
+    color: #2E8B57;
+    background: #FFF;
+}

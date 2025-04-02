@@ -1,0 +1,23 @@
+#detailed-monkey-card .card-image-container {
+    min-height: 100%;
+}
+
+@media (min-width: 992px) {
+
+    /* lg breakpoint */
+    #detailed-monkey-card .card-image-container {
+        border-radius: 1rem 0 0 1rem;
+    }
+}
+
+#detailed-monkey-card .list-group {
+    border-radius: 1rem;
+}
+
+#detailed-monkey-card #delete-monkey-button {
+    background-color: #9f0c0c;
+}
+
+#detailed-monkey-card #edit-monkey-button:hover {
+    color: #ffffff;
+}
