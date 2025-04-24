@@ -1,25 +1,14 @@
 import { useState, useContext } from "preact/hooks";
 import { route } from "preact-router";
 
-import { Monkey } from "../models/monkey";
+import { Monkey, IMonkey } from "../models/monkey";
 import { MonkeyContext } from "../data/monkeyContext";
 
 import './CreateView.css';
 
-interface MonkeyProps {
-    commonName: string;
-    genus: string;
-    species: string;
-    subSpecies: string;
-    avgLifespan: number;
-    habitat: string;
-    description: string;
-    imageUrl: string;
-}
-
 export default function CreateView() {
     const monkeys = useContext(MonkeyContext);
-    const [monkey, setMonkey] = useState<MonkeyProps>({
+    const [monkey, setMonkey] = useState<IMonkey>({
         commonName: '',
         genus: '',
         species: '',
@@ -40,17 +29,26 @@ export default function CreateView() {
         });
     }
 
-    const submitHandler = (e: Event) => {
+    const submitHandler = async (e: Event) => {
         e.preventDefault();
 
         // Created with id=0 because addMonkey handles the id assignment
-        let newMonkey = new Monkey(
-            0, monkey.commonName, monkey.genus, monkey.species,
-            monkey.subSpecies, monkey.avgLifespan, monkey.habitat,
-            monkey.description, monkey.imageUrl
-        );
-        monkeys.addMonkey(newMonkey);
-        route(`/monkeys/${newMonkey.id}`);
+        let newMonkey = {
+            commonName: monkey.commonName,
+            genus: monkey.genus,
+            species: monkey.species,
+            subSpecies: monkey.subSpecies,
+            avgLifespan: monkey.avgLifespan,
+            habitat: monkey.habitat,
+            description: monkey.description,
+            imageUrl: monkey.imageUrl
+        }
+        const createdMonkey = await monkeys.addMonkey(newMonkey);
+        if (createdMonkey) {
+            route(`/monkeys/${createdMonkey.id}`);
+        } else {
+            console.error("Error adding new monkey!");
+        }
     }
 
     const gotoMainPage = () => {

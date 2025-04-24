@@ -21,8 +21,7 @@ interface MonkeyProps {
 
 export default function EditView({ id }: EditViewProps) {
     const monkeys = useContext(MonkeyContext);
-    const monkeyId = parseInt(id, 10);
-    const selectedMonkey = monkeys.data.find(monkey => monkey.id === monkeyId);
+    const selectedMonkey = monkeys.data.find(monkey => monkey.id === id);
     const [previewImageUrl, setPreviewImageUrl] = useState<string>(selectedMonkey?.imageUrl || '');
     const [monkey, setMonkey] = useState<MonkeyProps>({
         commonName: selectedMonkey?.commonName || '',
@@ -66,7 +65,7 @@ export default function EditView({ id }: EditViewProps) {
         });
     }
 
-    const submitHandler = (e: Event) => {
+    const submitHandler = async (e: Event) => {
         e.preventDefault();
 
         let newMonkey = new Monkey(
@@ -74,12 +73,16 @@ export default function EditView({ id }: EditViewProps) {
             monkey.species, monkey.subSpecies, monkey.avgLifespan,
             monkey.habitat, monkey.description, monkey.imageUrl
         );
-        monkeys.updateMonkey(newMonkey);
-        route(`/monkeys/${newMonkey.id}`);
+        const updatedMonkey = await monkeys.updateMonkey(newMonkey);
+        if (updatedMonkey) {
+            route(`/monkeys/${updatedMonkey.id}`);
+        } else {
+            console.error("Error updating monkey!");
+        }
     }
 
     const gotoPreviousMonkey = () => {
-        const nextId = monkeys.data.findIndex(monkey => monkey.id === monkeyId) - 1;
+        const nextId = monkeys.data.findIndex(monkey => monkey.id === id) - 1;
         if (nextId < 0) {
             route(`/monkeys/${monkeys.data[monkeys.data.length - 1].id}/edit`);
         } else {
@@ -88,11 +91,11 @@ export default function EditView({ id }: EditViewProps) {
     }
 
     const gotoDetailedView = () => {
-        route(`/monkeys/${monkeyId}`);
+        route(`/monkeys/${id}`);
     }
 
     const gotoNextMonkey = () => {
-        const nextId = monkeys.data.findIndex(monkey => monkey.id === monkeyId) + 1;
+        const nextId = monkeys.data.findIndex(monkey => monkey.id === id) + 1;
         if (nextId >= monkeys.data.length) {
             route(`/monkeys/${monkeys.data[0].id}/edit`);
         } else {

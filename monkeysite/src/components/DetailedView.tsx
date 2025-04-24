@@ -12,8 +12,7 @@ interface DetailedViewProps {
 
 export default function DetailedView({ id }: DetailedViewProps) {
     const monkeys = useContext(MonkeyContext);
-    const monkeyId = parseInt(id, 10);
-    const selectedMonkey = monkeys.data.find(monkey => monkey.id === monkeyId);
+    const selectedMonkey = monkeys.data.find(monkey => monkey.id === id);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const openDeleteModal = () => {
@@ -25,12 +24,12 @@ export default function DetailedView({ id }: DetailedViewProps) {
     };
 
     const handleDeleteConfirmed = () => {
-        monkeys.deleteMonkey(monkeyId);
+        monkeys.deleteMonkey(id);
         route('/');
     };
 
     const gotoPreviousMonkey = () => {
-        const nextId = monkeys.data.findIndex(monkey => monkey.id === monkeyId) - 1;
+        const nextId = monkeys.data.findIndex(monkey => monkey.id === id) - 1;
         if (nextId < 0) {
             route(`/monkeys/${monkeys.data[monkeys.data.length - 1].id}`);
         } else {
@@ -43,7 +42,7 @@ export default function DetailedView({ id }: DetailedViewProps) {
     }
 
     const gotoNextMonkey = () => {
-        const nextId = monkeys.data.findIndex(monkey => monkey.id === monkeyId) + 1;
+        const nextId = monkeys.data.findIndex(monkey => monkey.id === id) + 1;
         if (nextId >= monkeys.data.length) {
             route(`/monkeys/${monkeys.data[0].id}`);
         } else {
